@@ -5,4 +5,14 @@
 	<p appStyle="blue" [styles]="{border: '1px solid red', borderRadius: '15px'}">
 		Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut, laboriosam.
 	</p>
+
+	<button class="btn" (click)="isVisible = !isVisible">Toggle</button>
+
+<!--	<div class="wrap" *ngIf="isVisible">-->
+<!--		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid animi autem dolores harum laboriosam laborum natus quas sequi sint velit.</p>-->
+<!--	</div>-->
+
+  <div class="wrap" *appIfnot="!isVisible">
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid animi autem dolores harum laboriosam laborum natus quas sequi sint velit.</p>
+  </div>
 </div>
