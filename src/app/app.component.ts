@@ -12,7 +12,7 @@ export class AppComponent implements OnInit {
 	public skills!: AbstractControl[];
 
 	public ngOnInit(): void {
-    this.form = new FormGroup({
+		this.form = new FormGroup({
 			// @ts-ignore
 				email: new FormControl('', [Validators.email, Validators.required, MyValidators.restrictedEmails], MyValidators.uniqEmail),
 				password: new FormControl('', [Validators.required, Validators.minLength(10)]),
@@ -30,6 +30,8 @@ export class AppComponent implements OnInit {
 			const formData = { ...this.form.value };
 
 			console.log(formData)
+
+			this.form.reset();
 		}
 	}
 
@@ -52,6 +54,6 @@ export class AppComponent implements OnInit {
 		(<FormArray>this.form.get('skills')).push(control)
 		// (this.form.get('skills') as FormArray).push(control)
 
-    this.skills = (this.form?.get('skills') as FormArray)?.controls
+		this.skills = (this.form?.get('skills') as FormArray)?.controls
 	}
 }
