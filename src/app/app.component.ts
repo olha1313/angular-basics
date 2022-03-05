@@ -26,12 +26,20 @@ export class AppComponent {
 		}
 	};
 
-	search = '';
-	searchField: string = 'title';
+	public search = '';
+	public searchField: string = 'title';
 
-	posts: Post[] = [
+	public posts: Post[] = [
 		{title: 'Javascript', text: 'The best language'},
 		{title: 'Typescript', text: 'Is awesome'},
 		{title: 'HTML', text: 'Cool!'}
 	]
+
+	public addPost(): void {
+		this.posts.unshift({
+			title: 'Angular 8',
+			text: 'New version of Angular'
+		})
+
+	}
 }
