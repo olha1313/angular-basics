@@ -25,21 +25,21 @@
 			</div>
 		</div>
 
-		<div class="card">
+		<div class="card" formGroupName="address">
 			<h2>Address</h2>
 
 			<div class="form-control">
 				<label>Country</label>
 
-				<select>
-					<option value="ua">Ukraine</option>
+				<select formControlName="country">
 					<option value="us">United States</option>
+					<option value="ua">Ukraine</option>
 					<option value="uk">United Kingdom</option>
 				</select>
 			</div>
 
 			<div class="form-control">
-				<input type="text">
+				<input type="text" formControlName="city">
 			</div>
 
 			<button class="btn" type="button">Choose the capital</button>
