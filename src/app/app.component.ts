@@ -12,8 +12,9 @@ export class AppComponent implements OnInit {
 	public skills!: AbstractControl[];
 
 	public ngOnInit(): void {
-			this.form = new FormGroup({
-				email: new FormControl('', [Validators.email, Validators.required, MyValidators.restrictedEmails]),
+    this.form = new FormGroup({
+			// @ts-ignore
+				email: new FormControl('', [Validators.email, Validators.required, MyValidators.restrictedEmails], MyValidators.uniqEmail),
 				password: new FormControl('', [Validators.required, Validators.minLength(10)]),
 				address: new FormGroup({
 					country: new FormControl('ua'),

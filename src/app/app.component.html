@@ -9,6 +9,7 @@
 			<div class="validation" *ngIf="form.get('email')?.invalid && form.get('email')?.touched">
 				<small *ngIf="form.get('email')?.errors?.['required']">Email can not be empty</small>
 				<small *ngIf="form.get('email')?.errors?.['restrictedEmail']">Email {{ form.get('email')?.value }} is restricted</small>
+				<small *ngIf="form.get('email')?.errors?.['uniqEmail']">Email {{ form.get('email')?.value }} is taken</small>
 				<small *ngIf="form.get('email')?.errors?.['email']">Fill in correct email</small>
 			</div>
 		</div>
@@ -55,7 +56,7 @@
 			</div>
 		</div>
 
-		<button class="btn" type="submit" [disabled]="form.invalid">Send</button>
+		<button class="btn" type="submit" [disabled]="form.invalid || form.pending">Send</button>
 
 	</form>
 </div>
