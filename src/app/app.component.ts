@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import { Observable } from 'rxjs';
 
 export interface Post {
 	title: string,
@@ -10,7 +11,14 @@ export interface Post {
 	templateUrl: './app.component.html',
 	styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
+	public ngOnInit(): void {
+			this.newDate$.subscribe(date => {
+				this.newDate = date;
+			})
+	}
+
+	public newDate!: Date;
 	public e: number = Math.E;
 	public str = 'hello world'
 	public date: Date = new Date();
@@ -40,6 +48,17 @@ export class AppComponent {
 			title: 'Angular 8',
 			text: 'New version of Angular'
 		})
-
 	}
+
+	public promise: Promise<string> = new Promise<string>(resolve => {
+		setTimeout(() => {
+			resolve('Promise resolved')
+		}, 4000)
+	})
+
+	public newDate$: Observable<Date> = new Observable<Date>(obs => {
+		setInterval(() => {
+			obs.next(new Date())
+		}, 1000)
+	})
 }

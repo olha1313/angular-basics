@@ -29,4 +29,8 @@
 		<h2>{{ post.title }}</h2>
 		<p>{{ post.text }}</p>
 	</div>
+
+	<p>Wait for it... {{ promise | async }}</p>
+	<p>Date: {{ newDate$ | async }}</p>
+	<p>Date: {{ newDate }}</p>
 </div>
