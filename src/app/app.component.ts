@@ -10,6 +10,7 @@ import { MyValidators } from './my.validators';
 export class AppComponent implements OnInit {
 	public form!: FormGroup;
 	public skills!: AbstractControl[];
+	public appState = 'on';
 
 	public ngOnInit(): void {
 		this.form = new FormGroup({
