@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import { catchError, delay, Observable, throwError } from 'rxjs';
+import { HttpClient, HttpEventType, HttpHeaders, HttpParams } from '@angular/common/http';
+import { catchError, delay, map, Observable, tap, throwError } from 'rxjs';
 
 export interface Todo {
 	completed: boolean,
@@ -23,20 +23,40 @@ export class TodosService {
 		})
 	}
 
-	public fetchTodos(): Observable<Todo[]> {
+	public fetchTodos(): Observable<Todo[] | any> {
 		let params = new HttpParams();
 		params = params.append('_limit', '4');
 		params = params.append('custom', 'anything');
 
 		return this.http.get<Todo[]>(this.getUrl, {
 			// params: new HttpParams().set('_limit', '4')
-			params
+			params,
+			observe: 'response'
 		})
-			.pipe(delay(500))
+			.pipe(
+				map(response => {
+					console.log(response)
+					return response.body;
+				}),
+				delay(500)
+			)
 	}
 
 	public removeTodo(id?: number): Observable<void | object> {
-		return this.http.delete(`${this.url}/id`)
+		return this.http.delete(`${this.url}/id`, {
+			observe: 'events'
+		})
+			.pipe(
+				tap(event => {
+					if (event.type === HttpEventType.Sent) {
+						console.log('sent', event)
+					}
+
+					if (event.type === HttpEventType.Response) {
+						console.log('response', event)
+					}
+				})
+			)
 	}
 
 	public completeTodo(id?: number): Observable<Todo| object> {
