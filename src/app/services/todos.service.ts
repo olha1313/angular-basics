@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, delay, Observable, throwError } from 'rxjs';
 
 export interface Todo {
@@ -18,7 +18,9 @@ export class TodosService {
 	constructor(private http: HttpClient) {}
 
 	public addTodo(todo: Todo): Observable<Todo> {
-		return this.http.post<Todo>(this.url, todo)
+		return this.http.post<Todo>(this.url, todo, {
+		  headers: new HttpHeaders({ 'myHeader': Math.random().toString() })
+		})
 	}
 
 	public fetchTodos(): Observable<Todo[]> {
