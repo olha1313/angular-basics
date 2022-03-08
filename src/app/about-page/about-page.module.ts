@@ -14,7 +14,7 @@ import { AboutExtraPageComponent } from './about-extra-page/about-extra-page.com
 		SharedModule,
 		CommonModule,
 		RouterModule.forChild([
-			{ path: 'about', component: AboutPageComponent, children: [
+			{ path: '', component: AboutPageComponent, children: [
 					{ path: 'extra', component: AboutExtraPageComponent }
 				]
 			},
