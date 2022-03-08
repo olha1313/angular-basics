@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { delay, Observable } from 'rxjs';
+import { catchError, delay, Observable, throwError } from 'rxjs';
 
 export interface Todo {
 	completed: boolean,
@@ -28,5 +28,16 @@ export class TodosService {
 
 	public removeTodo(id?: number): Observable<void | object> {
 		return this.http.delete(`${this.url}/id`)
+	}
+
+	public completeTodo(id?: number): Observable<Todo| object> {
+		return this.http.put(`${this.url}/id`, {
+			completed: true
+		})
+			.pipe(
+				catchError (error => {
+				return throwError(error);
+			})
+		)
 	}
 }

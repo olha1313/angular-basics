@@ -10,6 +10,7 @@ export class AppComponent implements OnInit {
 	public todos: Todo[] = [];
 	public todoTitle = '';
 	public loading = false;
+	public error = '';
 
 	constructor(private todosService: TodosService) {}
 
@@ -50,5 +51,16 @@ export class AppComponent implements OnInit {
 			.subscribe(() => {
 				this.todos = this.todos.filter(todo => todo.id !== id)
 			})
+	}
+
+	public completeTodo(id?: number) {
+		this.todosService.completeTodo(id)
+			.subscribe(
+			  todo => {
+				// @ts-ignore
+				this.todos.find(todo => todo.id === todo.id).completed = true;
+			},error => {
+        this.error = error.message;
+      })
 	}
 }
