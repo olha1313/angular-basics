@@ -13,7 +13,7 @@ export class PostsComponent implements OnInit {
 	}
 
 	ngOnInit(): void {
-		this.service.fetch().subscribe(p => {
+		this.service.fetchPromise().then(p => {
 			// @ts-ignore
 			this.posts = p
 		})
